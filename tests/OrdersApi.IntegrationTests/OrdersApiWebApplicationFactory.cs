@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using OrdersApi.Data;
 
 namespace OrdersApi.IntegrationTests;
