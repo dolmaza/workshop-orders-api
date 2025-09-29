@@ -19,6 +19,13 @@ public class OrdersControllerIntegrationTests : IClassFixture<OrdersApiWebApplic
     {
         _factory = factory;
         _client = factory.CreateClient();
+
+        // Ensure a clean database state for each test
+        using var scope = _factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
+        context.Orders.RemoveRange(context.Orders);
+        context.OrderItems.RemoveRange(context.OrderItems);
+        context.SaveChanges();
     }
 
     [Fact]

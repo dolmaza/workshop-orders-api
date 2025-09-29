@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OrdersApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/orders")]
 [Produces("application/json")]
 public class OrdersController(IOrderService orderService, ILogger<OrdersController> logger) : ControllerBase
 {

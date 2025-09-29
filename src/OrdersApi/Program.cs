@@ -2,6 +2,7 @@ using OrdersApi.Data;
 using OrdersApi.Repositories;
 using OrdersApi.Services;
 using OrdersApi.Middleware;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -9,8 +10,11 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddControllers()
-    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
+builder.Services.AddControllers();
+
+// FluentValidation integration
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 // Configure database
 builder.Services.AddDatabase(builder.Configuration);
@@ -87,3 +91,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+// Explicit Program type for test host discovery
+public partial class Program { }
